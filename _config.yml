@@ -1,0 +1,42 @@
+# Site settings
+title:       Melodie Zhang
+email:       zhangmenghan728@gmail.com
+author:      Melodie
+description: "Melodie's field"
+baseurl:     ""
+url:         "http://melodiezhang.com"
+timezone: Asia/Beijing
+
+# Google analytics
+google_analytics: 
+
+# Optional features
+animated:           false
+show_related_posts: false
+show_post_footers:  false
+
+# Disqus post comments
+# (leave blank to disable Disqus)
+disqus_shortname: melodiezhang
+
+# Social icons
+show_social_icons: true
+github_username: melodiezhang
+dribbble_username: melodiezhang
+stackoverflow_id:
+twitter_username: melodiezhang
+linkedin_username: 
+weibo_id: 1784081017 
+instagram_username: melodiebunny
+behance_id: melodie728
+
+
+# Build settings
+markdown:     redcarpet
+redcarpet:
+  extensions: ['smart', 'tables', 'with_toc_data']
+permalink:    pretty
+paginate:     5
+paginate_path: "/page:num/"
+sass:
+  compressed: true
