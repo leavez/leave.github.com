@@ -5,7 +5,7 @@ category:   []
 tags: [设计]
 published: True
 date: 2015-8-11
-summary:  设计 Web 端 menu 组件时遇到的问题和解决办法
+summary:  今天在设计统一的知乎 Web 端 menu 的过程中，研究了下不同情况下的 menu 组件的最佳形式。Menu 按有无分隔线可抽象为三类：1. 每个 item 之间都有分隔线；2. 每个 item 之间都没有分隔线；3. item 有分组，不同的组之间用分隔线隔开。知乎的 Web 端恰好同时存在这三种情况，怎样设计 menu 才能兼顾？
 --- 
 
 

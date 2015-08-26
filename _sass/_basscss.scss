@@ -28,7 +28,7 @@ article, aside, details, figcaption, figure, footer, header, main, nav, section,
 }
 
 body {
-  font-family: 'Open Sans','Helvetica Neue',Arial,'Hiragino Sans GB','Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;
+  font-family: 'Hiragino Sans GB','Open Sans','Helvetica Neue',Arial,'Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;
   line-height: 1.5rem;
   font-weight: 400;
 }
@@ -678,11 +678,11 @@ body {
 }
 
 a {
-  color: #0096cc;
+  color: #FF8CB0;
   text-decoration: none;
 }
 a:hover {
-  color: #007199;
+  opacity: .8;
 }
 
 .button {

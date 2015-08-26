@@ -5,12 +5,12 @@ category:   []
 tags: [设计]
 published: True
 date: 2015-03-3
-summary:  关于材料设计，除去它的性感与炫酷，来关注其斑斓界面背后的理论根基
+summary:  2014年 Google 的 Material Design 从发布后就一直是互联网设计界的热门话题。扁平、材料、隐喻、 动效，这些词语成为了设计师们津津乐道的话题，也同时激起了一股 Android App Redesign 的热潮，比如这个： Feedly 的重设计。At Google we say，「Focus on the user and all else will follow」...
 --- 
   
-2014年 Google 的 Material Design 从发布后就一直是互联网设计界的热门话题。扁平、材料、隐喻、 动效，这些词语成为了设计师们津津乐道的话题，也同时激起了一股 Android App Redesign 的热潮，比如这个： [Feedly 的重设计](https://medium.com/feedly-behind-the-curtain/an-exploration-in-material-design-by-feedly-8c1a1cbdfdcd)。  
+2014年 Google 的 Material Design 从发布后就一直是互联网设计界的热门话题。扁平、材料、隐喻、 动效，这些词语成为了设计师们津津乐道的话题，也同时激起了一股 Android App Redesign 的热潮，比如这个： [Feedly 的重设计](https://medium.com/feedly-behind-the-curtain/an-exploration-in-material-design-by-feedly-8c1a1cbdfdcd)。 
   
-> At Google we say, “Focus on the user and all else will follow.” We embrace that principle in our design by seeking to build experiences that surprise and enlighten our users in equal measure. 
+> At Google we say, 「Focus on the user and all else will follow」 ，We embrace that principle in our design by seeking to build experiences that surprise and enlighten our users in equal measure. 
   
 按照 Material Design 规范出壳的 App 视觉体验都不会太差，然而除去视觉这一单一感受，在这种新型设计语言的背后，是自成体系的一套理论支撑。它甚至重新定义了触摸这一动作的反馈意义，让每一个虚拟元素都能找到现实中经验主义的根据。在 Google 原生的系列 App 逐步用上 Material Design 后，大家纷纷开始惊叹：“原来 Android 也可以这么美！”
   

@@ -5,7 +5,7 @@ category:   []
 tags: [我读]
 published: True
 date: 2015-02-21
-summary:  AK said, "Some advice can be a vice."
+summary:  2月份读到这本短小精悍的小书，第二遍时依旧爱不释手。Austin Kleon 的语言简单易懂，小道理讲得字字珠玑。太阳下没有新鲜事，所有你以为是新的东西都早已诞生过，只是我们不知道而已。从设计者的角度来说，巧妙地“偷”是一个自我提升和学习的好方式，并不等同于设计师们诟病的商业或其他类型的抄袭...
 --- 
   
 ![image](http://i3.tietuku.com/823635721dfa19a3.jpg)

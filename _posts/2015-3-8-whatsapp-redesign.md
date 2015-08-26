@@ -5,7 +5,7 @@ category:   []
 tags: [设计]
 published: True
 date: 2015-03-8
-summary:  WhatsApp 重设计过程记录
+summary: 前几年我用过一段时间的 WhatsApp，后来由于国内小伙伴们都去了微信的阵营，不能一起玩耍，于是最后在1年免费期限还没到的时候就没再用了。WhatsApp 属于功能型的应用，刚需比界面美不美更有杀伤力，所以长期以来，在还看得过去的外貌与稳定实时的信息功能结合下，WhatsApp 的用户量一直很有保障...
 --- 
 
 ![image](http://i3.tietuku.com/7a88d4382e90bfe1.jpg)

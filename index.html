@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="home">
-<div class="post-by-tag"><a href="{{ site.baseurl | append: '/tags/'}}" style="font-size: 0.6em">Posts by Tag</a></div>
+<!--<div class="post-by-tag"><a href="{{ site.baseurl | append: '/tags/'}}" style="font-size: 0.6em">Posts by Tag</a></div>-->
 
   <div class="posts">
  
@@ -12,8 +12,9 @@ layout: default
         <a href="{{ post.url | prepend: site.baseurl }}" class="post-link">
           
           <h4 class="h4 post-title">{{ post.title }}</h4>
+          <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
           <p class="post-summary">{{ post.summary }}</p>
-          <!--<p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>-->
+          
         </a>
       </div>
     {% endfor %}
