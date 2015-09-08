@@ -9,8 +9,8 @@ permalink: /about/
 
   
 **Project**    
-[Design Notebook](http://daily.zhihu.com/circle/68509)     
-我每天会阅读一些设计相关的英文一手文章，创建这个主题日报，希望分享推荐我看过的优质内容，欢迎订阅.   
+[Design Notebook](http://daily.zhihu.com/circle/68509) 
+一份设计主题日报，分享、推荐我读过的设计相关英文一手文章，欢迎订阅.
   
 [Melodesign](http://zhuanlan.zhihu.com/melodie)  
 一个专栏，记录我在设计中的所得与积累.
