@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      设计圈的负能量
+title:      设计的负能量
 category:   []
 tags: [设计]
 published: True
