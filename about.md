@@ -9,7 +9,7 @@ permalink: /about/
 
   
 **Project**    
-[Design Notebook](http://daily.zhihu.com/circle/68509)   
+[Design Notebook](http://dudu.zhihu.com/circle/68509)   
 一份设计主题日报，分享、推荐我读过的设计相关英文一手文章，欢迎订阅.
   
 [Melodesign](http://zhuanlan.zhihu.com/melodie)  
