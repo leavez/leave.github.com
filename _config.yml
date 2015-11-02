@@ -40,3 +40,5 @@ paginate:     5
 paginate_path: "/page:num/"
 sass:
   compressed: true
+gems :
+  - jekyll-paginate
