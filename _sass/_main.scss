@@ -79,7 +79,7 @@ body {
 }
 
 .site-header nav a:hover {
-  color: #FF8CB0;
+  color: #00c7b0; // #FF8CB0;
   opacity: 1;
 }
 
@@ -169,11 +169,11 @@ table {
 
 .post-link .post-title {
   margin-top: 0;
-  color: #FF8CAC;
+  color: #00c7b6 ; // #FF8CAC;
 }
 
 .post-header h4 {
-  color: #FF8CB0;
+  color: #00c7b0 ; // #FF8CB0;
 }
 
 .post-footer {
@@ -414,7 +414,7 @@ h6,
 
 @media screen and (min-width: 48em) {
   .site-header .site-title {
-  
+
   }
 
   .meta,
@@ -452,7 +452,7 @@ h6,
   }
 
   .p,
-  p {  
+  p {
     margin-bottom: 1.4rem;
   }
 
@@ -501,7 +501,7 @@ h6,
   }
 
   .p,
-  p {  
+  p {
     margin-bottom: 1.4rem;
   }
 
