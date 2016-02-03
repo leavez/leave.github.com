@@ -1,32 +1,32 @@
 # Site settings
-title:       Melodie
-email:       zhangmenghan728@gmail.com
-author:      Melodie
-description: "Melodie's blog"
+title:       Leave
+email:       leveadeveloper@gmail.com
+author:      Leave
+description: "Leave's blog"
 baseurl:     ""
-url:         "http://melodiezhang.com"
+url:         "http://gaojiji.me"
 timezone: Asia/Beijing
 
 # Google analytics
-google_analytics: 
+google_analytics:
 
 # Optional features
-animated:           false
+animated:           true
 show_related_posts: false
 show_post_footers:  false
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname: melodiezhang
+# disqus_shortname:
 
 # Social icons
-show_social_icons: true
+show_social_icons: false
 github_username: melodiezhang
 dribbble_username: melodiezhang
 stackoverflow_id:
 twitter_username: melodiezhang
 linkedin_username: melodiezhang
-weibo_id: 1784081017 
+weibo_id: 1784081017
 instagram_username: melodiebunny
 behance_id: melodie728
 
