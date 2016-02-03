@@ -91,8 +91,9 @@ body {
   opacity: 1;
 }
 
-.site-nav a + a {
-  margin-left: 2.6em;
+.navibutton {
+  width: 5.45rem;
+  display: inline-block; // horizotal display
 }
 
 .site-nav {
