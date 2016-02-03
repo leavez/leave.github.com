@@ -16,6 +16,14 @@
 
 body {
   font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
+  font-weight: 300;
+}
+a {
+  text-decoration: none;
+  color: #FA9380; //#FF8CB0;
+}
+a:hover {
+  opacity: .8;
 }
 
 html, body {
@@ -91,6 +99,7 @@ body {
   margin-top: 60px;
   margin-bottom: 30px;
   padding: 0;
+  font-weight: 400;
 }
 
 .site-header a:hover,
@@ -296,7 +305,7 @@ textarea.input {
 p {
   font-weight: 300;
   line-height: 1.5;
-  color: #333;
+  color: #666;
 }
 
 abbr {
@@ -377,6 +386,15 @@ h6,
   line-height: 1.5;
   margin: 1.5em 0 0.5em;
 }
+
+// h1,
+// .h1,
+// h2,
+// .h2,
+// h3,
+// .h3 {
+//   color: #FA9380 ;
+// }
 
 .social-icons {
     padding: 2em 0 0 0;
