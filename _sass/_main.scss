@@ -315,23 +315,27 @@ abbr {
 }
 
 pre, code {
-  font-family: Menlo, Monaco, "Courier New", monospace
+  font-family: 'Source Code Pro',Menlo, Monaco, "Courier New", monospace;
+  tab-size: 4;
+  font-weight: 400;
 }
 
-code {
-  color: #7a7a7a;
-}
 
 pre {
-  padding: 1.125em;
-  font-size: 1.125rem;
-  line-height: 1.11;
+  font-size: 0.9rem;
+  line-height: 1.4;
   overflow-x: scroll;
+  padding: 0.5rem 1rem;
   margin-bottom: 0.88em;
+  border-radius: 2px;
+}
+
+pre.highlight {
+  background-color: #fafafa; // code block background color
 }
 
 .highlight .p {
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
