@@ -32,11 +32,9 @@ behance_id:
 
 
 # Build settings
-markdown:     kramdown
+# markdown: kramdown
 kramdown:
-  input:      GFM
-# redcarpet:
-  # extensions: ['smart', 'tables', 'with_toc_data']
+  input: GFM
 permalink:    pretty
 paginate:     5
 paginate_path: "/page:num/"
