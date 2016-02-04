@@ -5,7 +5,7 @@ author:      Leave
 description: "Leave's blog"
 baseurl:     ""
 url:         "http://gaojiji.me"
-timezone: Asia/Beijing
+timezone:    Asia/Beijing
 
 # Google analytics
 google_analytics:
@@ -21,20 +21,22 @@ show_post_footers:  false
 
 # Social icons
 show_social_icons: false
-github_username: melodiezhang
-dribbble_username: melodiezhang
+github_username:
+dribbble_username:
 stackoverflow_id:
-twitter_username: melodiezhang
-linkedin_username: melodiezhang
-weibo_id: 1784081017
-instagram_username: melodiebunny
-behance_id: melodie728
+twitter_username:
+linkedin_username:
+weibo_id:
+instagram_username:
+behance_id:
 
 
 # Build settings
-markdown:     redcarpet
-redcarpet:
-  extensions: ['smart', 'tables', 'with_toc_data']
+markdown:     kramdown
+kramdown:
+  input:      GFM
+# redcarpet:
+  # extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty
 paginate:     5
 paginate_path: "/page:num/"
