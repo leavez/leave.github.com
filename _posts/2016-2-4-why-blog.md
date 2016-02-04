@@ -27,28 +27,33 @@ date:       2016-2-4
 想法中认为理解的东西，可能只是你认定的理解。当它们被写下来的时候，就会发现其中的不严谨\不完备\不够结构化，书写的过程就是在不断克服这些东西。而且写给大众 ( 而不是局限为自己的笔记 ) 会更加强化这个作用。博客的存在也会更加督促自己把一些东西书写下来。
 
 
-<!--## 网站的建立
-### Why Github Pages?
+## 网站的构建
+##### Why Github Pages?
 
 简单地说来，我觉得 Melodie 的这个样式很好看，所以就直接拿来用了。
 
-[Github Pages](https://pages.github.com) 是一个静态网页 hoster。只需要把编写好的静态网页放到自己的 Github 仓库 ( 的 gh-pages 分支 ) 中，就可以通过  `http://your-username.github.io/your-repository-name` 访问到。同时，它使用 [Jekyll](http://jekyllrb.com) 提供了动态内容生成的功能，适合简单 blog 使用。比如
-
+##### 简单介绍
+[Github Pages](https://pages.github.com) 是一个静态网页 hoster。只需要把编写好的静态网页放到自己的 Github 仓库 ( 的 gh-pages 分支 ) 中，就可以通过  
+```
+	http://your-username.github.io/your-repository-name
+```
+访问到。同时，它使用 [Jekyll](http://jekyllrb.com) 提供了动态内容生成的功能，适合简单 blog 使用。Jekyll 相当于一个编译器，把混杂代码的 HTML 转换成静态的 HTML。比如在 HTML 中嵌入如下代码:
+```
 	{% for post in paginator.posts %}
         <a href="{{ post.url | prepend: site.baseurl }}" >
-          <h4>{{ post.title }}</h4>
+            {{ post.title }}
         </a>
     {% endfor %}
-    
-    
+```
+就可以建立一个文章列表。当然对于已有样式，不需要考虑这些，新建 Markdown 文件写文章即可。
 
-Markdown, Git 这些都是程序员喜欢的东西。
+<!--Markdown, Git 这些都是程序员喜欢的东西。
 
 
 ## 最后
 既然开始了，就会继续下去。  
   
-话说回来，博客终究只是一个最终产物。对于一个命题的思考来自于平时生活学习的点滴，总结消化、反思咀嚼后才诉诸语言分享到这个平台上来。博客上的文字是思考的结果，而我也希望通过这一方式来鞭策自己去真正思考出一些自己的东西，包括设计、观点以及每一处我感兴趣的领域。  --> 
+话说回来，博客终究只是一个最终产物。对于一个命题的思考来自于平时生活学习的点滴，总结消化、反思咀嚼后才诉诸语言分享到这个平台上来。博客上的文字是思考的结果，而我也希望通过这一方式来鞭策自己去真正思考出一些自己的东西，包括设计、观点以及每一处我感兴趣的领域。 -->
 
 
 
