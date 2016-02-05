@@ -5,7 +5,7 @@ permalink: /about/
 ---
 ![image](/images/IMG_ME.jpg)  
 
-我是 Leave，是一个 iOS Developer.   
+我是 Leave，是一个 iOS 程序员。   
 
 <!--**Project**    
 [Design Notebook](http://dudu.zhihu.com/circle/68509)   
