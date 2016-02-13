@@ -12,7 +12,7 @@ google_analytics:
 
 # Optional features
 animated:           false
-mainPageAnimated:   true
+mainPageAnimated:   false
 show_related_posts: false
 show_post_footers:  false
 
