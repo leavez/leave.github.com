@@ -36,12 +36,15 @@
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        "fast-preview": {
+          disabled: true
+        },
+        jax: ["input/TeX","output/SVG"],
         tex2jax: {
           inlineMath:  [ ['$','$']   ],
           displayMath: [ ['$$','$$'],['\[','\]']]
         },
         "HTML-CSS": {
-          scale: 60,
           linebreaks: {automatic: true}
         }
       });

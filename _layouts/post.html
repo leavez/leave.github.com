@@ -2,19 +2,33 @@
 layout: default
 ---
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $('img').each(function () {
+    var caption = $(this).attr('alt');
+    if (caption !== '')
+    // use .before to insert the caption before the image
+    var container = document.createElement("div");
+    $(this).after(container);
+    $(container).append(this);
+    $(container).append('<figcaption>' + caption + '</figcaption>');
+  });
+})
+</script>
+
 {% assign minutes = content | number_of_words | divided_by: 180 %}
 {% if minutes == 0 %}
 {% assign minutes = 1 %}
 {% endif %}
 
 <div class="post-header mb2">
-  <h4>{{ page.title }}</h4>
+  <h3>{{ page.title }}</h3>
   <span class="post-meta">{{ page.date | date: "%b %-d, %Y" }}</span><br>
   {% if page.update_date %}
     <span class="post-meta">Updated: {{ page.update_date | date: "%b %-d, %Y" }}</span><br>
 
   {% endif %}
-  
+
 </div>
 
 

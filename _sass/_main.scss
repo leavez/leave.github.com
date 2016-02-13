@@ -14,13 +14,38 @@
 */
 
 
+// Macro
+
+$main_tint_color: #FA9380;
+$reading_text_color: #505050;
+$title_text_color: #333;
+$page_header_text_color: $reading_text_color;
+$main_text_weight: 300;
+$reading_text_weigth: 300;
+//
+
+
 body {
   font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
-  font-weight: 400;
+  font-weight: $main_text_weight; //
 }
+
+p {
+  color: $reading_text_color;
+  font-weight: $reading_text_weigth;
+  line-height: 1.7;
+
+  // hyphens
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  word-break: break-word;
+}
+
 a {
   text-decoration: none;
-  color: #FA9380; //#FF8CB0;
+  color: $main_tint_color; //#FF8CB0;
 }
 a:hover {
   opacity: .8;
@@ -34,7 +59,40 @@ html, body {
 img {
   width: auto;
   max-width: 100%;
+
+  // align center
+  display: block;
+  margin: 0.5rem auto;
+  // margin-left: auto;
+  // margin-right: auto
 }
+
+
+figcaption {
+  max-width: 80%;
+  text-align: center;
+
+  font-size: 0.9rem;
+  color: #aaa;
+
+  // align center
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.MathJax_Display,
+.MathJax_SVG_Display {
+   font-size: 1rem;
+   color: $reading_text_color;
+}
+
+// .MathJax,
+// .MathJax_SVG {
+//   // 与其他文字左右自动间距
+//   margin-right: 0.3em !important; // override mathjax's setting
+//   margin-left: 0.3em !important;
+// }
 
 .site-wrap {
   min-height: 100%;
@@ -43,7 +101,7 @@ img {
 
 .site-wrap:after {
   content: "";
-  display: block;
+  display: 1.7;
 }
 
 .footer, .site-wrap:after {
@@ -52,7 +110,7 @@ img {
 
 
 body {
-  font-size: 1.5rem;
+  font-size: 1rem;
 
           box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -75,19 +133,19 @@ body {
 .site-header a.site-title {
   /*font-weight: 600;*/
   font-family: 'Bodoni';
-  color: #666;
+  color: $page_header_text_color;
   font-weight: 600;
   font-size: 1.9rem;
 }
 
 .site-header nav a {
   font-size: 1rem;
-  color: #666;
+  color: $page_header_text_color;
   padding-bottom: .3rem;
 }
 
 .site-header nav a:hover {
-  color: #FA9380; // #FF8CB0;
+  color: $main_tint_color; // #FF8CB0;
   opacity: 1;
 }
 
@@ -182,8 +240,8 @@ table {
   color: #FF9E8A ; // #FF8CAC;
 }
 
-.post-header h4 {
-  color: #FA9380 ; // #FF8CB0;
+.post-header h3 {
+  color: $main_tint_color ; // #FF8CB0;
 }
 
 .post-footer {
@@ -203,7 +261,7 @@ table {
 .button {
   font-size: 1rem;
   font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: 300;
+  font-weight: $main_text_weight;
   text-align: center;
 }
 
@@ -277,7 +335,7 @@ table {
 
 .pagination .button {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: $main_text_weight;
   letter-spacing: 1px;
 }
 
@@ -295,7 +353,7 @@ table {
 
 form {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: 300;
+  font-weight: $reading_text_weigth;
   font-size: 1rem;
 }
 
@@ -303,11 +361,7 @@ textarea.input {
   height: 7em;
 }
 
-p {
-  font-weight: 400;
-  line-height: 1.5;
-  color: #666;
-}
+
 
 abbr {
   border-bottom: 1px black dotted;
@@ -349,7 +403,7 @@ blockquote {
 }
 
 blockquote p {
-  color: #666;
+  color: $reading_text_color;
 }
 
 blockquote footer {
@@ -387,19 +441,28 @@ h5,
 h6,
 .h6 {
   font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
-  font-weight: 300;
+  font-weight: $main_text_weight;
+  color: $title_text_color;
   line-height: 1.5;
-  margin: 1.5em 0 0.5em;
+  margin: 1rem 0 1rem;
 }
 
-// h1,
-// .h1,
-// h2,
-// .h2,
-// h3,
-// .h3 {
-//   color: #FA9380 ;
-// }
+//
+
+p + h1,
+p + .h1,
+p + h2,
+p + .h2,
+p + h3,
+p + .h3,
+p + h4,
+p + .h4,
+p + h5,
+p + .h5,
+p + h6,
+p + .h6 {
+  margin: 1em 0 1rem;
+}
 
 .social-icons {
     padding: 2em 0 0 0;
@@ -464,7 +527,7 @@ h6,
 
   .h4,
   h4 {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
 
   .p,
@@ -551,7 +614,7 @@ h6,
 
   .h4,
   h4 {
-    font-size: 1.4rem;
+    font-size: 1.22rem;
   }
 
   .site-header {
@@ -584,54 +647,54 @@ h6,
   }
 }
 
-@media screen and (min-width: 64em) {
-  .h1,
-  h1 {
-    font-size: 4.498rem;
-  }
-
-  .h2,
-  h2 {
-    font-size: 2.298rem;
-  }
-
-  .h3,
-  h3 {
-    font-size: 2.249rem;
-  }
-
-  .h4,
-  h4 {
-    font-size: 1.6rem;
-  }
-
-  .posts .post-meta {
-    padding-bottom: .2em;
-    font-size: .85rem;
-  }
-
-  .post-link .post-title {
-    margin-top: .125em;
-  }
-
-  .posts {
-    margin: 0 auto;
-    width: 600px;
-  }
-
-  .posts .post {
-    margin-bottom: 1em;
-    margin-top: 2em;
-    padding-bottom: .8em;
-    /*border-bottom: thin solid #f3f3f3;*/
-  }
-
-  .posts .post:last-child {
-    border-bottom: none;
-    margin-bottom: .666em;
-    padding-bottom: 0;
-  }
-}
+// @media screen and (min-width: 64em) {
+//   .h1,
+//   h1 {
+//     font-size: 4.498rem;
+//   }
+//
+//   .h2,
+//   h2 {
+//     font-size: 2.298rem;
+//   }
+//
+//   .h3,
+//   h3 {
+//     font-size: 2.249rem;
+//   }
+//
+//   .h4,
+//   h4 {
+//     font-size: 1.6rem;
+//   }
+//
+//   .posts .post-meta {
+//     padding-bottom: .2em;
+//     font-size: .85rem;
+//   }
+//
+//   .post-link .post-title {
+//     margin-top: .125em;
+//   }
+//
+//   .posts {
+//     margin: 0 auto;
+//     width: 600px;
+//   }
+//
+//   .posts .post {
+//     margin-bottom: 1em;
+//     margin-top: 2em;
+//     padding-bottom: .8em;
+//     /*border-bottom: thin solid #f3f3f3;*/
+//   }
+//
+//   .posts .post:last-child {
+//     border-bottom: none;
+//     margin-bottom: .666em;
+//     padding-bottom: 0;
+//   }
+// }
 
 footer {
   border-top: thin solid #f3f3f3;
@@ -642,7 +705,7 @@ footer .wrap {
   color: #7a7a7a;
   background-color: #fafafa;
   font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: 300;
+  font-weight: $reading_text_weigth;
   clear: both;
 }
 
@@ -672,66 +735,4 @@ footer:after {
 .share-page .fa-facebook {
   color: #3B5893;
   padding: 0 .3rem;
-}
-@charset "UTF-8";
-
-/*!
-Animate.css - http://daneden.me/animate
-Licensed under the MIT license - http://opensource.org/licenses/MIT
-
-Copyright (c) 2014 Daniel Eden
-*/
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.infinite {
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-}
-
-.animated.hinge {
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-}
-
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(-20px);
-    transform: translateY(-20px);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-
-    -webkit-transform: translateY(-20px) translate3d(0, 0, 0);
-        -ms-transform: translateY(-20px) translate3d(0, 0, 0);
-            transform: translateY(-20px) translate3d(0, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-
-    -webkit-transform: translateY(0) translate3d(0, 0, 0);
-        -ms-transform: translateY(0) translate3d(0, 0, 0);
-            transform: translateY(0) translate3d(0, 0, 0);
-  }
-}
-
-.fade-in-down {
-  -webkit-animation-name: fadeInDown;
-          animation-name: fadeInDown;
 }
