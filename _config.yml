@@ -8,7 +8,7 @@ url:         "http://gaojiji.me"
 timezone:    Asia/Beijing
 
 # Google analytics
-google_analytics:
+google_analytics: "UA-74152229-1"
 
 # Optional features
 animated:           false
