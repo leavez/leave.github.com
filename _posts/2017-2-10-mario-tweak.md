@@ -17,7 +17,7 @@ date:       2017-2-12
 
 前几日发现 iOS 10.2 可以越狱了，作为一个开发者，迫不及待地越狱了自己的手机。越狱后打开 Mario，竟然发现了启动闪退（启动画面之后就立刻退出了）。不禁职业性地感叹，作为一个大厂，产品就这个质量？？
 
-![emoji](../images/2017-2-10-mario/emoji.jpg)
+![](/images/2017-2-10-mario/emoji.jpg)
 
 重试了几次，稳定复现，怀疑和刚才的越狱有关。google 一下，发现是游戏本身做的限制。可以断定为为了防止在越狱手机上作弊，而主动做出的限制，Ingress、PokemanGo 都有同样的机制（但起码人家是提示有问题，而不是像 crash 一样的表现）。
 
@@ -39,7 +39,7 @@ App 检测越狱环境的方式有很多，其基本原理是做一些在越狱�
 
 这个项目非常简单， 文件如下:
 
-![files](../images/2017-2-10-mario/files.png)
+![](/images/2017-2-10-mario/files.png)
 
 其中 `plist` 文件负责指定插件生效的 app 的 bundle ID，`control` 是存储名称作者等信息，`makefile` 配置编译参数，真正的代码只有一个文件 `Tweak.mm` 。它的核心内容也非常简单，最主要的内容就是一句话:
 
@@ -80,13 +80,13 @@ make package install ！！！！然而，还是闪退。事情果然没有这�
 
 越狱手机上安装 Clutch（它是一个命令行工具），它是用来「砸壳」的，因为 appstore app 都是经过加密的，否则不能 dump。app binary 存放在 `/var/containers/Bundle/Application` 下 （Mario 的 app 叫 rb\_02\_04 … app, 不知道为什么，因为里面的 binary 叫 Super Mario Run 我才认出来的），在手机上使用 Clutch 对 binary 文件进行处理 （这里需要 root 权限，开始试了几次都提示 segment fault）。把解密后的 Binary 考到电脑里，使用 classdump 工具生成头文件。
 
-![headers](../images/2017-2-10-mario/headers.png)
+![dump 出的头文件](/images/2017-2-10-mario/headers.png)
 
 通过很简单的方式，OC 的类名、继承关系、函数名全都生成出来了。 从这个角度看，OC 真是什么隐私都没有呀 ╮(╯▽╰)╭ 。
 
 在这里文件里，尝试搜索 jailbreak、sandbox 等字段，找到了 `FIRInstanceID` 下的 `- (_Bool)isSandboxApp;` 感觉很像，编辑 hook 代码:
 
-```objective-c
+```
 %hook FIRInstanceID
 + (void)load {
   NSLog(@"GAO: I'm in"); // 为了确认 hook 生效
@@ -105,11 +105,11 @@ make package install ！！！打开 Mario，继续闪退。通过 Xcode - Devic
 
 把 binary 拖进 Hopper Disassembler 里，
 
-![assemble](../images/2017-2-10-mario/assemble.png)
+![](/images/2017-2-10-mario/assemble.png)
 
 一脸懵逼。。。
 
-![meng](../images/2017-2-10-mario/meng.jpg)
+![](/images/2017-2-10-mario/meng.jpg)
 
 尝试搜索 isSandboxApp 那个函数，找到了实现，但并不能向上找到调用的地方。既然不擅长看汇编，有没有什么方式可以找到一些提示呢？
 
@@ -123,7 +123,7 @@ iPhone SpringBoard[1672] <Notice>: Process exited: <FBApplicationProcess: 0x10be
 
 `exitReason: voluntary` ，难道程序自己调用了 `exit(0)` ? 那我们就 hook 一下 `exit() ` ，作为切入点。
 
-```objective-c
+```
 void exit(int);
 %hookf(void, exit, int code) {
   NSLog(@"GAO: we're hooking exit");
@@ -151,13 +151,13 @@ void exit(int);
 
 通过 Hopper 的 `Go to file offset` 功能，我们找到了这三个函数的实现。OC 的函数调用，在汇编下还是很好认的，以为 OC 的方法调用，其实最终就是 `msg_send` 函数的调用。方法（selector）作为字符串类型的参数， 可以直接在反汇编中给出注释。而且函数调用中使用 X0 X1 X2 等寄存器作为参数的存放，其每个寄存器存什么都是有固定套路的 （`[X0 X1: X2 foo:X3 bar:stack...]`）。下图是个简单的例子。很明显它调用了 `[NSBundle mainBundle]`。
 
-![selector_assemble](../images/2017-2-10-mario/selector_assemble.png)
+![](/images/2017-2-10-mario/selector_assemble.png)
 
 然而在我找出来的这三个过程里，确实一片茫茫汇编海洋，没有一个 OC 的函数，都是使用类似 `bl` 的汇编跳转指令直接跳转地址。只有最上层的显示是一个 OC 函数，[UnityAppController repaint]。游戏应该是用 Unity 做的，repaint 很明显是一个与显示有关的函数，hook 它为空函数。打开 App 后的确没闪退，但是也什么都没有显示。
 
 仔细看了这几个调用过程里，发现了一段代码感觉很像:
 
-![code](../images/2017-2-10-mario/code.png)
+![](/images/2017-2-10-mario/code.png)
 
 很明显，1012bdd84 那行是个 if 判断，一个分支是走到了 1012bdd90 那行，跟进去地区找到了 exit 函数的调用，算是检测到越狱环境退出，而另一个分支则继续运行。这个 procedure 这么短，明显不是真正检测函数所在，而这里面的 1012bdd78 和 1012bdd7c 两个 `bl` 一定就是真正判断的函数。
 
@@ -171,11 +171,11 @@ void exit(int);
 
 在汇编中搜索 `"/bin/bash"`这样的字符串，试图找找到调用的地方，而这个调用一定是越狱检查的函数。真的有这样的字符串（似乎 1.1.1 版本里已经没了），该字符串调用的地方只有一处，着一定是我们要找的函数了。然而，还是没有函数名给我们 hook。但这里明显出现了 `fileExistsAtPath:` 这样敏感的函数。
 
-![file_function](../images/2017-2-10-mario/file_function.png)
+![](/images/2017-2-10-mario/file_function.png)
 
 对这个函数 hook 过呀？难道封堵的路径还不全？打印出来看看
 
-```objective-c
+```
 %hook NSFileManager
 - (BOOL)fileExistsAtPath:(NSString *)path {
   if(!allowAccess(path)){
