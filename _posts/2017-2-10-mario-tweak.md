@@ -7,8 +7,6 @@ published:  True
 date:       2017-2-12
 ---
 
-# Run Mario！写一个越狱插件
-
 ## 摘要
 
 本文记叙了制作一个越狱插件的过程，它可以解除 SuperMarioRun 在越狱手机上的限制。（SuperMarioRun 是任天堂在 iOS 平台上推出的一款游戏）。插件可以通过 Cydia 安装（搜索 RunMario）。
@@ -63,7 +61,7 @@ static FILE *optimized_fopen(const char *filename, const char *mode) {
 很好很直接 (´･ω･｀) 。我把生效的 bundle ID 改成 Mario 的 com.nintendo.zara ，通过 [THEOS](https://github.com/theos/theos) 编译 （这里的作用相当于 xcode）
 
 ```shell
-make package install 
+make package install
 ```
 
 （通过 `make package` 就可以生成 .deb 包，如果配置好 ssh 就可以直接通过 `install` 安装到手机上，也可以手动通过 传到手机里，通过 iFile 等工具来安装。）
@@ -163,7 +161,7 @@ void exit(int);
 
 很明显，1012bdd84 那行是个 if 判断，一个分支是走到了 1012bdd90 那行，跟进去地区找到了 exit 函数的调用，算是检测到越狱环境退出，而另一个分支则继续运行。这个 procedure 这么短，明显不是真正检测函数所在，而这里面的 1012bdd78 和 1012bdd7c 两个 `bl` 一定就是真正判断的函数。
 
-然而跟下去又是一片茫茫汇编海洋。没有函数名，就没有办法 hook 更改，无能为力。即使我们知道 if 判断就在这个地址，也是不能直接改 binary 的 （代码签名通不过）。无奈，谁叫游戏都用 c++ 写的呢 ╮(╯▽╰)╭ 
+然而跟下去又是一片茫茫汇编海洋。没有函数名，就没有办法 hook 更改，无能为力。即使我们知道 if 判断就在这个地址，也是不能直接改 binary 的 （代码签名通不过）。无奈，谁叫游戏都用 c++ 写的呢 ╮(╯▽╰)╭
 
 看了很久汇编，没有进展，有些灰心。
 
@@ -206,4 +204,3 @@ Finally~
 使用 `make package FINALPACKAGE=1` build 一个 release 版的 deb 包。Control 文件里的一些信息就是要在 cydia 里展示的，要好好填写。
 
 BigBoss 是 Cydia 的默认源之一，并且可以免费提供 host。在 [这里](http://thebigboss.org/hosting-repository-cydia) 进行简单的填写上传包即可。等待一两天就可以上架看到了。
-
