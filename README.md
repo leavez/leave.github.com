@@ -1,3 +1,3 @@
-Personal page and blog of Melodie Zhang.
+Personal blog. [http://leavez.github.io](http://leavez.github.io)
 
-Powered by [Jekyll](http://jekyllrb.com/) and based on the [Pixyll](http://www.pixyll.com) theme.
+Powered by [Jekyll](http://jekyllrb.com/) 
