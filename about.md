@@ -15,6 +15,6 @@ permalink: /about/
 一个专栏，记录我在设计中的所得与积累.-->
 
 ##### Contact
-如果有任何建议，欢迎发邮件到 leaveDeveloper#gmail.com.    
+info@leavez.me    
 
 
