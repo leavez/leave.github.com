@@ -15,13 +15,13 @@ date:       2017-3-20
 
 ## 一个隐藏的参数
 
-### 优雅的曲线
+### 好看的曲线
 
 ![三种动画曲线](/images/2017-3-30-animation_curve/start_animation.gif)
 
-图中第一条曲线是一条很好看的动画曲线，看起来很有灵性。它不是 iOS 系统自带的四种曲线，也不是常见的 CSS 动画曲线。其实它也是 iOS 中的一条动画曲线，但是没有囊括在 UIViewAnimationCurve 中，而是一个隐藏的值。
+图中第一个动画有一个很好看的动画曲线，看起来很有灵性。这条动画曲线不是 iOS 中默认的那四种，也不是其他[常见的曲线](http://easings.net/zh-cn)。它是 iOS 中一个隐藏的动画参数，没有囊括在 UIViewAnimationCurve 中。
 
-这条曲线并不陌生，它是键盘弹出的动画曲线。在使文本输入框与键盘同步弹出的场景里，监听 `UIKeyboardWillShowNotification`，通知里自带了曲线和动画时间[^1]。它的值是 7。
+这条曲线并不陌生，它被键盘弹出动画所采用。在实现输入框与键盘同步弹出的场景里，我们会监听键盘弹出的通知。系统在通知的 userInfo 中提供了这个动画的曲线[^1]，它的值为 7。
 
 在工程中，这样可以应用这条曲线[^2]:
 
@@ -34,11 +34,11 @@ UIView.animate(withDuration: 0.25, animations: {
 
 ### 动画时间
 
-但你会惊奇地发现，只要使用了这个曲线，动画时间无法被改变，即无论 duration 传了什么值，动画的速度和 CompletionBlock 的调用时间都是一样的。
+但你会惊奇地发现，一旦使用了这个曲线，动画时间将无法改变，即无论 duration 传了什么值，动画的速度和 CompletionBlock 的调用时间都是一样的。
 
 在键盘弹出的通知中， `UIKeyboardAnimationDurationUserInfoKey` 给出的值是 0.25。但根据实际测试，这个值并不准确。
 
-我们使用 CATransaction 获取来获取动画结束的时刻，并打印用时。（更多 CATransaction 的用法参见[这里](http://calayer.com/core-animation/2016/05/17/catransaction-in-depth.html) )
+我们使用 CATransaction 获取来获取动画结束的时刻，并打印用时。（这个方法可以为任何动画提供 CompletionBlock 的调用，很实用。更多 CATransaction 的用法参见[这里](http://calayer.com/core-animation/2016/05/17/catransaction-in-depth.html) )
 
 ```swift
 let begin = CFAbsoluteTimeGetCurrent()
@@ -51,19 +51,9 @@ CATransaction.setCompletionBlock {
 CATransaction.commit()
 ```
 
-可以得到，这个动画的 **duration 是 0.5s **。
+可以得到，这个动画的 duration 是 0.5s。
 
-### 尝试改变动画时间
-
-尝试使用如下方法改变动画时间:
-
-- CATransaction.setAnimationDuration， 没有作用。
-- view.layer.duration，导致 view 不显现（原因未知）
-- view.layer.speed
-  - 在设置比 1 小的值时: 动画时间会变长。但只是把「帧率」降低，「帧数」并没有增加，表现的行为是一帧一帧缓慢跳跃，没有实际意义。
-  - 比 1 大 : 有效。例如 speed = 2, 时间会缩小一半。帧率提高不会使动画变得断断续续，但并没有达到最佳效果。
-
-既然隐藏的参数带来许多不可控的行为，那么我们就拟合出这个曲线，使用自定义的 CATimingFunction 来控制动画，然后就可以自由控制了。
+尝试几种方式改变动画的时间，都没有达到最完美的效果[^5]。既然隐藏的参数带来许多不可控的行为，那么我们希望可以拟合出这个曲线，应用在 CATimingFunction 中，以获得更多的控制空间。
 
 ## Rebuid it!
 
@@ -73,7 +63,7 @@ CATransaction.commit()
 
 CAMediaTiming 是 CAAnimation 和 CALayer 都实现的一个协议。动画中与时间有关系的属性，最终都与这个协议有关[^3]。这里只使用协议中的两个属性: `speed` 和 `timeOffset`。`speed` 控制动画的速度，当它设为 0 的时候，动画就停止了。`timeOffset` 表示时间的进度，单位为秒，（可以认为）取值范围为 [0, duration] 。
 
-在开始执行一个动画后，我们设置 `view.layer.speed = 0` 使动画暂停，然后手动控制 `timeOffset` 以控制动画的进度。我们等差遍历 `timeOffset` ，然后在每一次遍历中，获取 `view.layer.presentation()` 的属性，就可以得到动画百分比与时间的关系。
+在开始执行一个动画后，我们设置 `view.layer.speed = 0` 使动画暂停，然后手动控制 `timeOffset` 以控制动画的进度。我们等差遍历 `timeOffset` ，然后在每一次遍历中，获取 `view.layer.presentation()` 的属性，就可以得到动画百分比与时间的关系[^4]。
 
 ```swift
 
@@ -128,7 +118,7 @@ struct Helper {
 
 导出的数据[在此](/images/2017-3-30-animation_curve/keyboard_curve_data.txt)。绘制得到曲线如下:
 
-![键盘弹出的动画曲线](/images/2017-3-30-animation_curve/keyboard_curve.png)
+![键盘弹出的动画曲线。可以看出，它的进入较缓的起始，然后在大约一半时间内完成了 90%，然后有一个很缓慢的结束](/images/2017-3-30-animation_curve/keyboard_curve.png)
 
 ### Animation Timing Function
 
@@ -136,7 +126,7 @@ iOS 动画的曲线，即 timingFunction，是由 cubic bezier 曲线表示。�
 
 ### 通过数据集拟合 Bezier 曲线
 
-使用 http://nbviewer.jupyter.org/gist/anonymous/5688579 里面描述的方法，求出给定数据集的 least squares fitting，给出 control point。（这是找到的唯一一个对应这个问题的代码可以运行的解答，还是很难找的）
+使用 http://nbviewer.jupyter.org/gist/anonymous/5688579 里面描述的方法，求出给定数据集的 least squares fitting，给出 control point。（这是找到的唯一一个对应这个问题的且代码可以运行的回答，其他相关资料都不对题）
 
 对上面得到的数据，计算出的结果是:
 
@@ -146,7 +136,7 @@ iOS 动画的曲线，即 timingFunction，是由 cubic bezier 曲线表示。�
 
 ![红色曲线为拟合的结果](/images/2017-3-30-animation_curve/fitting.png)
 
-可以看出对于导出数据的最佳 Bezier 拟合并不是我们想要的结果，在起始和结束部分有较大的误差。这也表示这条隐藏的动画曲线并不是 Cubic Bezier 曲线。由于 CAMediaTimingFunction 只能使用 Bezier 曲线来表示，timingFunction 的拟合已经无法实现。
+可以看出，对于导出数据的最佳 Bezier 拟合并不是我们想要的结果，在起始和结束部分有较大的误差。这也表示这条隐藏的动画曲线并不是 Cubic Bezier 曲线。由于 CAMediaTimingFunction 只能使用 Bezier 曲线来表示，timingFunction 的拟合已经无法实现。
 
 ## Aha, CASpringAnimation !
 
@@ -169,7 +159,9 @@ print(anis)
 <CASpringAnimation:0x6000002373a0; timingFunction = linear; duration = 0.5; velocity = 0; damping = 500; stiffness = 1000; mass = 3; keyPath = position>
 ```
 
-原来这是一个 SpringAnimation。常见的 SpringAnimation 都是在终点值附近波动几下，所以很难看出来它是一个 SpringAnimation。在阻尼震动中，在终点值附近波动的是欠阻尼状态，即日常所说的弹簧效果。当阻尼系数大于某个值时，震动不会在终点值附近波动，而是缓慢靠近终点值，这种情况叫[过阻尼](https://zh.wikipedia.org/wiki/阻尼)。而我们的动画曲线就是处于过阻尼的状态。
+原来这是一个 SpringAnimation，从这个角度看，它已经不是一个动画曲线了。
+
+常见的 SpringAnimation 都是在终点值附近波动几下，所以很难看出来它是一个 SpringAnimation。在阻尼震动中，在终点值附近波动的是欠阻尼状态，即日常所说的弹簧效果。当阻尼系数大于某个值时，震动不会在终点值附近波动，而是缓慢靠近终点值，这种情况叫[过阻尼](https://zh.wikipedia.org/wiki/阻尼)。而我们的动画曲线就是处于过阻尼的状态。
 
 手动创建 CASpringAnimation，来模拟隐藏动画曲线的效果:
 
@@ -192,7 +184,10 @@ ani.duration = 0.5
 ![三种速度的演示](/images/2017-3-30-animation_curve/slow.gif)
 
 
+
+
 [^1]: 从 notification.userInfo 中提取 `UIKeyboardAnimationCurveUserInfoKey` 和`UIKeyboardAnimationDurationUserInfoKey`
 [^2]: 虽然是私有 API，但是已经在多个线上的 APP 中使用过，没有问题。
 [^3]: 一篇很好的讲解文章 http://ronnqvi.st/controlling-animation-timing/
 [^4]: 这个方法来自于右划返回的一种实现方式，参见 http://www.iosnomad.com/blog/2014/5/12/interactive-custom-container-view-controller-transitions Appendix A
+[^5]: `CATransaction.setAnimationDuration`， 没有作用。`view.layer.duration`，导致 view 不显现（原因未知）。`view.layer.speed`，在设置比 1 小的值时: 动画时间会变长。但只是把「帧率」降低，「帧数」并没有增加，表现的行为是一帧一帧缓慢跳跃，没有实际意义。比 1 大 时: 有效。例如 speed = 2, 时间会缩小一半。帧率提高不会使动画变得断断续续，但并没有达到最佳效果。
