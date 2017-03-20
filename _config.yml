@@ -13,7 +13,7 @@ google_analytics: "UA-74152229-1"
 # Optional features
 animated:           false
 mainPageAnimated:   false
-show_related_posts: true
+show_related_posts: false
 show_post_footers:  false
 
 # Disqus post comments
