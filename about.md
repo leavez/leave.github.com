@@ -7,6 +7,8 @@ permalink: /about/
 
 我是 Leave，是一个 iOS 程序员。   
 
+[Github/leavez](https://github.com/leavez)
+
 <!--**Project**    
 [Design Notebook](http://dudu.zhihu.com/circle/68509)   
 一份设计主题日报，分享、推荐我读过的设计相关英文一手文章，欢迎订阅.
