@@ -79,33 +79,41 @@ sketch 对于多行文本设定非常简单，只有一个 `lineHeight` 值，�
 
 可以看出，不同平台对于这些参数的实现形式是不一样的，这就造成了开头所说的问题。为了解决这个问题，需要统一两个平台的效果:
 
-我们这样约定显示规则:
+我们这样约定显示规则: （这种约定不是唯一的选择，但这样设定更方便使用和理解）
 
-- 单行文本: 文本框高度等于 font 的 line height:
-- 多行文本: 只在行与行之间加入 spacing，同使用 iOS lineSpacing  的效果。并使用 multiple 来描述 spacing 的大小。
+- 使用相同的字体: SF UI（或 SF Pro）
+- 单行文本: 文本框高度等于 font 的 line height
+- 多行文本: 只在行与行之间加入 spacing，同使用 iOS lineSpacing 的效果。并使用 multiple 来描述 spacing 的大小。
 
 通过以下的方式可以实现上述效果:
 
-- 单行文本: 
-  - iOS: UIlabel，使用 autolayout。或者其他等同效果的 view[^textkit]。
-  - sketch: 默认设定，不可以手动更改行高。
-- 多行文本: 
-  - iOS: 使用 lineSpacing  属性。设定 `lineSpacing  = font.lineHeight * (multiple - 1.0 )`  。其中存在取整的问题需要注意[^lineSpacing]。
-  - sketch: 无法直接实现，使用插件。
+- 字体:
+  - iOS : 使用系统默认字体 SF UI，可以使用 systemFontOfSize 方法获得（systemFontOfSize:weight: 方法也可以，字重没有影响）。注意不能直接使用 PingFang SC 字体，它与 SF UI 的 line height 不同。
+  - sketch: 使用 SF UI Text 或 SF UI Display，两者在横向上都会有误差，原因后面会说明。同样不能直接使用 PingFang SC，虽然在使用 SF UI 的中文会 fall back 到 PingFang SC, 但两者的 line height 不同，PingFang SC 会更大一点。
+- 单行文本:
+  - iOS: UILabel，使用 autolayout（view 高度精确到像素）。或者其他等同效果的 view，内部使用 textKit 的都有一样的效果1。UILabel 在（只有一行，有中文，paragraph style 中的 line spacing 不为零）的情况下有个小 bug，view 的高度会比 line height 大。解决办法是去掉 lineSpacing，或者设定 view 高度等于 font.lineHeight。
+  - sketch: 对于纯英文的情况下，使用 text layer 的默认高度即可，不要手动更改行高。如果有中文，view 高度会比 SF 字体的 line height 高。需要使用插件设定文本的 line height multiple 为 1（后面介绍）。
+- 多行文本:
+  - iOS: 行间距的设置使用 lineSpacing 属性实现。设定 lineSpacing = font.lineHeight * (multiple - 1.0 ) 。其中存在取整的问题需要注意2。
+  - sketch: 使用插件直接设置 line height multiple。比如想要 1.2 倍行高，直接输入 1.2。
 
-因为 sketch 无法直接达到想要的效果，为此写了一个插件 [sketch-engineer-friendly-text](https://github.com/leavez/sketch-engineer-friendly-text)。其实上面的约定不是唯一的选择，但这样设定更方便使用和理解。
+因为 sketch 无法直接达到想要的效果，为此写了一个插件 [sketch-engineer-friendly-text](https://github.com/leavez/sketch-engineer-friendly-text)。它可以通过输入的 multiple 值和字体的本身的 line height 自动计算行高。并把文本上下多余的「行间距」切掉。
 
 这样，我们统一了两个平台的显示效果，工程师在开发的时候只需直接遵照设计图上的参数，即可快速准确实现文字的显示样式。
 
 ## 实际效果
 
-通过这样的方式，一个实现的 [demo](https://github.com/leavez/Sketch-iOS-text-solution) 结果如下:
+通过这样的方式，实现了一个 [demo](https://github.com/leavez/Sketch-iOS-text-solution) ，结果如下:
 
 ![结果对比（原图很大，可以看到细节）](/images/2017-6-text-design/result.png)
 
 ![细节放大](/images/2017-6-text-design/result_detail.png)
 
 其中黑色和绿色部分是 ios 的结果， 白色和紫色的 sketch 反色的结果。左侧是一个文本框的全部，两者文字对齐，文本框大小一样，在纵向完全一致。右侧的放大版，g 和 r 虽然在纵向上有差异，但 sketch 中的 g 比 iOS 中的上下都要小，可能是字体的原因。baseline 仍然是完全一致的。
+
+![中文的情况](/images/2017-6-text-design/compareChineseCrop.png)
+
+中文的对比结果，在此看[原图](/images/2017-6-text-design/compareChinese.png)。在 30px 字体上，完全一致。在 60px 字体上，sketch 会偏下 1px，暂时没有解决，但也可以接受。 
 
 至于横向上的差异，原因[在此](https://developer.apple.com/ios/human-interface-guidelines/visual-design/typography#font-usage-and-tracking)，已经超出了本文的范围。
 
