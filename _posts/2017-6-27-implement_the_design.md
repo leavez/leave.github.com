@@ -75,6 +75,10 @@ Sketch 是常见的 UI 设计工具。sketch 中的一个单行文本框的高�
 
 sketch 对于多行文本设定非常简单，只有一个 `lineHeight` 值，对应于上文中的「行高」。设定  `lineHeight` 的效果是文字的每一行都变高了，原有的文字在每行内居中对齐。这个效果与 iOS 中使用 minimumLineHeight 是不一样的，后者是向下对齐。而与 iOS 中使用 lineSpacing 不同，首行和尾行外侧也会多出同样的空白边距。
 
+sketch 官方在 Medium 有一篇[文章](https://blog.sketchapp.com/typesetting-in-sketch-dc870fc334fc)，说明了 sketch 的行高的设计原则: 让行高更接近设计师的直观感受。
+
+> As you may have noticed, digital typography is an extremely complex issue. We’re living in an exciting era, where we have realized that it’s almost impossible to make a design look exactly the same on every device and platform.
+
 ## 解决方案
 
 可以看出，不同平台对于这些参数的实现形式是不一样的，这就造成了开头所说的问题。为了解决这个问题，需要统一两个平台的效果:
