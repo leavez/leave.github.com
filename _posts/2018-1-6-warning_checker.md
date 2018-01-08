@@ -11,11 +11,13 @@ date:       2018-1-6
 
 对于编译型语言，开启编译器的「Treat Warnings as Errors」是非常有益的。它把 warning  当做错误，会中断编译，强制我们修复问题。在没有开启这个功能的时候，warning 会随着开发不断积累增多。当数量很多的时候，新增的 warning 不容易被发现，从而掩盖问题。 对于一个自律的独立开发者，这个问题是可以避免的，但多人协作的情况下，需要「Treat Warnings as Errors」这样强制的功能来保障。
 
-但是它有一个问题: 对于开发和调试不太友好。我们会经常编译一些未完成的代码，这个时候非常容易出现 warning。比如调试时注释掉了几行代码，因此上一行出现了一个「未使用的变量」，打断编译，无法向下进行。此时必须手动（递归的）解决掉 warning， 而这没有任何实际意义。影响效率，非常讨厌。
+但是它有一个问题: 对于开发和调试不太友好。在编译一些未完成的代码的时候非常容易出现 warning，而这些 warning 没有任何实际意义。比如调试时注释掉了几行代码，因此上一行出现了一个「未使用的变量」，打断编译，无法向下进行。此时必须手动（递归的）解决掉 warning ，影响效率，非常讨厌。
+
+（如果不想读原理，直接的工具在[这里](https://github.com/leavez/LazyWarningChecker)）
 
 ## 在 commit 时禁止 warning
 
-我们需要更灵活的方式。在 commit 的时候禁止有 warning 的代码提交是一个很好的选择。开发的时候任你胡搞，只要提交的代码完好就可以了。虽然 Xcode 没有类似的功能直接使用，但自己实现原理也不复杂: 通过 git 的 pre-commit hook，检查是否存在 warning，如果有，则中断 commit 即可。
+在 commit 的时候禁止有 warning 的代码提交是一个更灵活的的选择。开发的时候任你胡搞，只要提交的代码完好就可以了。虽然 Xcode 没有类似的功能直接使用，但自己实现原理也不复杂: 通过 git 的 pre-commit hook，检查是否存在 warning，如果有，则中断 commit 即可。
 
 ### 如何检查代码存在 warning？
 
@@ -37,9 +39,9 @@ Xcode 编译的时候会把 log 保存成文件。通过添加 run script，打�
 
 其中 `Logs/Issues` 目录下保存了 xcode 界面中 Issues 展示的信息，也就是我们要找的 warning。
 
-log 以 `.xcactivitylog` 的文件存储，它其实就是一个 gzip 文件，解压后就可以读了。log 的组织有些混乱，每个 log 似乎是以 `\r` 分割。用最简单的方式过滤出 带有 warning 行，即可知道是否存在 warning。
+log 以 `.xcactivitylog` 的文件存储，它其实就是一个 gzip 文件。解压后的文件是一个特殊的序列化格式（ SLF0 ），解析后才能正确读取。[这里]( https://github.com/americanexpress/xcode-result-bundle-processor/blob/bc91947f33db322a790895ecea9309aea7e6af55/lib/xcoderesultbundleprocessor/slf0/tokenizer.rb) 示意了解析的方法。大致思路是每段数据先标数值，然后是类型，如果是 string 则后面接前面数值长度的内容。然后把 string 的内容过滤出来，再过滤包含 'warning:' 的行。这样就找到了所有 warning 的描述。
 
-我们把检查结果存放在 `your_project_dir/.warning_checker/last_result` 。
+我们把 warning 的数量存放在 `your_project_dir/.warning_checker/last_result` 。
 
 ### 添加 commit hook
 
@@ -67,8 +69,8 @@ log 以 `.xcactivitylog` 的文件存储，它其实就是一个 gzip 文件，�
 warning log 中包含文件路径、警告内容和对应的编译器 flag，我们可以做很多事情。对于前者，只需要在脚本中定制检查规则即可，对于「未使用的变量」，可以用 `-Wunused-variable` 的编译器 flag 来过滤。对于后者，因为已知文件路径和行数，可以通过 git 读取到 blame。
 
 ```python
-command = "git blame -L%s,+1 %s -p" % (lineNumber, path)
-result = subprocess.check_output(command, shell=True)
+command = ["git", "blame", "-L%s,+1" % lineNumber, filePath, "-p"] # "git blame -L22,+1 /path/to/file -p"
+out = subprocess.check_output(command, cwd=fileDir )
 ```
 
 
