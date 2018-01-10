@@ -28,6 +28,7 @@ $reading_text_weigth: 300;
 body {
   font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
   font-weight: $main_text_weight; //
+  color: $reading_text_color;
 }
 
 p {
@@ -371,9 +372,23 @@ abbr {
 }
 
 pre, code {
-  font-family: 'Source Code Pro',Menlo, Monaco, "Courier New", monospace;
+  font-family: SFMono-Regular, 'Source Code Pro',Menlo, Monaco, "Courier New", monospace;
   tab-size: 4;
   font-weight: 400;
+}
+code {
+  padding: 0.1em;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-sizing: border-box;
+  font-size: 0.95em;
+  background-color: rgba(27, 31, 35, 0.0470588);
+}
+pre code {
+  background-color: rgba(0,0,0,0);
+  font-size: 1em;
 }
 
 
