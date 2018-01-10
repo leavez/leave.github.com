@@ -73,7 +73,15 @@ command = ["git", "blame", "-L%s,+1" % lineNumber, filePath, "-p"] # "git blame 
 out = subprocess.check_output(command, cwd=fileDir )
 ```
 
+## Update
 
+如果你只想把指定的 warning 作为 error，可以直接设置编译器参数。
+
+使用 `-Werror=`。例如， `-Werror=unused-variable` 会把未使用的变量当做 error。而原来视作 warning 时，由 `-Wunused-variable` 来决定。把这个内容加到 build setting 的 `Other Warning Flags` 下。
+
+如果在开启「Treat warnings as errors」的时候，想忽略某些 warning，可以使用 `-Wno-error=`。例如在添加 `-Wno-error=unused-variable` 的时候， 「未使用的变量」warning 不会视为 error。
+
+[Reference](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html), [all warning flags](https://clang.llvm.org/docs/DiagnosticsReference.html)
 
 
 
