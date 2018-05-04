@@ -19,8 +19,8 @@ CocoaPods 以源代码的形式集成第三方库，这些库在开发的过程�
 Carthage 可以集成二进制库，为什么不用呢？有以下几个原因：
 
 - Pod 是一个简单的易用的组织文件\管理依赖的形式。它可以使用私有 Pod 或 本地 Pod，Podspec 和 Podfile 的配置就等于 xcproject 繁琐的项目文件。
-- Carthage 对于静态库的支持也不是很全面。动态库的问题太多了。
-- Carthage 无法继承源代码，但 Pod 可以用个各种方式进行二进制化
+- Carthage 对于静态库的支持不是很全面。动态库的问题太多了。
+- Carthage 无法集成源代码，但 Pod 可以用个各种方式进行二进制化，且可以切换
 - 并不是所有库都支持 Carthage
 
 ## 方案
@@ -35,9 +35,9 @@ Carthage 可以集成二进制库，为什么不用呢？有以下几个原因�
 2. 在你的 Podfile 做上面加上 `plugin 'cocoapods-binary'` ，并在想要二进制化的 pod 后面加上 `:binary => true` ( 或者直接使用 `all_binary!` 让全部生效 )
 3. pod install
 
-这样，需要预编译的库就已经变成了编译好的 framework，在开发的时候就不用反复编译，加快编译时间。更详细用法请跳转 [GitHub](https://github.com/leavez/cocoapods-binary).
+就这样！需要预编译的库就已经变成了编译好的 framework，在开发的时候就不用反复编译，加快编译时间。更详细用法请跳转 [GitHub](https://github.com/leavez/cocoapods-binary).
 
-它完全自动化，只需添加简单配置。在库升级的时候也不需要额外的操作。对于反复 pod install 也做了同普通 pod 一样的缓存机制，不会反复编译。
+它完全自动化，只需添加简单配置。在库升级的时候也不需要额外的操作。对于反复 pod install 也做了同普通 pod 一样的缓存机制，不会反复编译。如果需要临时切换成源代码，可以把参数设为 false 再 pod install 即可，很灵活。
 
 #### 实现方式
 
@@ -47,4 +47,6 @@ CocoaPods 本身提供了插件的机制。插件主要有两个用途，一是�
 
 cocoapods-binary 的主要原理就是在 pre install 的 hook 中，独立执行另外一个 pod install。这个独立的 install 根据 podfile 中的配置过滤出要二进制化的 pod，生成 pod project，再使用 xcodebuild 编译出 framework。接着在正常的 install 过程中，通过运行时更改 CocoaPod 的代码，使得在集成的时候，对于指定的库使用的刚才编译好的 framework，而非源代码。这些 framework 作为该 pod 库的 vendored_framework 来实现引用。
 
-思路很简单。这么做几乎无差别地支持了动态库和静态库，并且以 CocoaPods 的原生方式解决了预编译库的缓存与重复编译问题。对于主工程没有任何变化（前提是之前也使用了 `use_framework!`, use_framework 的更改不属于本文的范畴）。
+生成的 framework 文件保存在 Pod/_Prebuild/ 目录中，并符号链接到 Pod 目录下，以便 CocoaPods 使用。
+
+这种实现几乎无差别地支持了动态库和静态库，并且以 CocoaPods 的原生方式解决了预编译库的缓存与重复编译问题。对于主工程没有任何变化，不用做任何修改（前提是之前也使用了 `use_framework!`, use_framework 的更改不属于本文的范畴）。
