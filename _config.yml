@@ -1,8 +1,8 @@
 # Site settings
-title:       Leave
+title:       Leavez
 email:       info@leavez.me
-author:      Leave
-description: "Leave's blog"
+author:      Leavez
+description: "Leavez's blog"
 baseurl:     ""
 url:         "http://leavez.me"
 timezone:    Asia/Beijing
