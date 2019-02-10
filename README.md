@@ -1,3 +1,3 @@
-Personal blog. [http://leavez.me](http://leavez.me)
+Personal blog. [http://leavez.xyz](http://leavez.xyz)
 
 Powered by [Jekyll](http://jekyllrb.com/) 
