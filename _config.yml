@@ -1,10 +1,10 @@
 # Site settings
 title:       Leavez
-email:       info@leavez.me
+email:       info@leavez.xyz
 author:      Leavez
 description: "Leavez's blog"
 baseurl:     ""
-url:         "http://leavez.me"
+url:         "https://leavez.xyz"
 timezone:    Asia/Beijing
 
 # Google analytics
@@ -43,3 +43,6 @@ sass:
   compressed: true
 gems :
   - jekyll-paginate
+  
+plugins:
+  - jekyll-sitemap
