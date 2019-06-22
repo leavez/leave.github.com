@@ -22,11 +22,12 @@ $title_text_color: #333;
 $page_header_text_color: $reading_text_color;
 $main_text_weight: 400;
 $reading_text_weigth: 400;
+$main_width: 600px;
 //
 
 
 body {
-  font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
+  font-family: -apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
   font-weight: $main_text_weight; //
   color: $reading_text_color;
 }
@@ -309,7 +310,7 @@ table {
 
 .post .measure {
   margin: 0 auto;
-  width: 600px;
+  width: $main_width;
 }
 
 .archive {
