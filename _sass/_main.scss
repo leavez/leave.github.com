@@ -22,7 +22,7 @@ $title_text_color: #333;
 $page_header_text_color: $reading_text_color;
 $main_text_weight: 400;
 $reading_text_weigth: 400;
-$main_width: 600px;
+$main_width: 700px;
 //
 
 
@@ -394,6 +394,7 @@ pre code {
 }
 p code {
   font-size: 0.8em;
+  padding: 3px 5px;
 }
 
 
@@ -578,7 +579,7 @@ p + .h6 {
 
   .posts {
     margin: 0 auto;
-    width: 600px;
+    width: $main_width;
   }
 
   .posts .post {
