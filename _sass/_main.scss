@@ -25,9 +25,7 @@ $reading_text_weigth: 400;
 $main_width: 700px;
 //
 
-.home.archive {
-  margin-left: 48px;
-}
+
 
 body {
   font-family: -apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
@@ -528,6 +526,10 @@ p + .h6 {
 
   }
 
+  .home.archive {
+    margin-left: 48px;
+  }
+
   .meta,
   .post-meta {
     margin: 0;
@@ -565,6 +567,10 @@ p + .h6 {
   li {
     font-size: 1rem;
     line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  li {
     margin-bottom: 1rem;
   }
 
@@ -615,6 +621,10 @@ p + .h6 {
   li {
     font-size: 1rem;
     line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  li {
     margin-bottom: 1rem;
   }
 
