@@ -17,7 +17,7 @@ layout: default
             {% if post.summary.size > 0 %}
               {{ post.summary }}
             {% else %}
-              {{ post.content | strip_html | truncate: 150 }}
+              {{ post.content | strip_html | truncate: 300 }}
             {% endif %}
           </p>
         </a>

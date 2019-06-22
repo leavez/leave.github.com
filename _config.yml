@@ -37,7 +37,7 @@ behance_id:
 kramdown:
   input: GFM
 permalink:    pretty
-paginate:     3
+paginate:     5
 paginate_path: "/page:num/"
 sass:
   compressed: true
