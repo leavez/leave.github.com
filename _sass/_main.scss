@@ -373,11 +373,12 @@ abbr {
 }
 
 pre, code {
-  font-family: SFMono-Regular, 'Source Code Pro',Menlo, Monaco, "Courier New", monospace;
   tab-size: 4;
   font-weight: 400;
 }
+
 code {
+  font-family: Menlo, SFMono-Regular, 'Source Code Pro', Monaco, "Courier New", monospace;
   padding: 0.1em;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -390,6 +391,9 @@ code {
 pre code {
   background-color: rgba(0,0,0,0);
   font-size: 1em;
+}
+p code {
+  font-size: 0.8em;
 }
 
 
@@ -458,7 +462,6 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Open Sans','Helvetica Neue',Arial,'WenQuanYi Micro Hei',sans-serif;
   font-weight: $main_text_weight;
   color: $title_text_color;
   line-height: 1.5;
