@@ -17,6 +17,6 @@ permalink: /about/
 一个专栏，记录我在设计中的所得与积累.-->
 
 ##### Contact
-info@leavez.me    
+info@leavez.xyz  
 
 
