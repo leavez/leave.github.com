@@ -3,7 +3,7 @@ layout: page
 title: 
 permalink: /about/
 ---
-![image](/images/IMG_ME.jpg)  
+![image](/images/IMG_ME.jpeg)  
 
 我是 Leave，是一个 iOS 程序员。   
 
