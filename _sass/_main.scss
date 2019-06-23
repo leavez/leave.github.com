@@ -101,7 +101,6 @@ figcaption {
 
 .site-wrap {
   min-height: 100%;
-  margin-bottom: -120px;
 }
 
 .site-wrap:after {
@@ -751,23 +750,20 @@ footer:after {
 
 .share-page {
   padding: 0 0 2em 0;
-  font-size:  0.65em;
+  font-size:  0.8em;
   color: #a2a2a2;
   float: right;
 }
 
-.share-page div {
-  font-size: 1.3em;
-}
-.share-page .fa-google-plus {
-  color: #DC4D3F;
-  padding: 0 .3rem;
-}
 .share-page .fa-twitter {
   color: #59ADEB;
-  padding: 0 .3rem;
+}
+.share-page .fa-weibo {
+  color: #DF2029;
 }
 .share-page .fa-facebook {
   color: #3B5893;
-  padding: 0 .3rem;
+}
+.share-page a {
+  padding-left: 0.5em;
 }
