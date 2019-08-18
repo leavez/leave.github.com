@@ -53,7 +53,13 @@ swiftc -enable-library-evolution -emit-parseable-module-interface-path ./a.swift
 
 在生成 arm64 架构的接口文件时，就不会包含 A 。所以我们需要为每个支持的架构生成接口文件。
 
-参考 xcode 编译 framework 时的 log，其中有一个参数 `-emit-module-path some_path/file.swiftmodule ` 来生成 swiftmodule，与我们的操作类似，这说明方向是对的。只需要让 xcode 针对不同的架构，设置不同的参数即可。在 xcode 的 build settings 里，以及命令行中 xcodebuild 的参数中，都没有可直接针对架构设置不同参数的方法，使用环境变量也不可以。但 .xccofing 文件却提供了这样的能力。根据 [The Unofficial Guide to xcconfig files](https://pewpewthespells.com/blog/xcconfig_guide.html#CondVarArch) 中的说明，使用如下方式即可：
+参考 xcode 编译 framework 时的 log，其中有一个参数 
+
+```
+-emit-module-path some/path/to/file.swiftmodule
+``` 
+
+来生成 swiftmodule，与我们的操作类似，这说明方向是对的。只需要让 xcode 针对不同的架构，设置不同的参数即可。在 xcode 的 build settings 里，以及命令行中 xcodebuild 的参数中，都没有可直接针对架构设置不同参数的方法，使用环境变量也不可以。但 .xccofing 文件却提供了这样的能力。根据 [The Unofficial Guide to xcconfig files](https://pewpewthespells.com/blog/xcconfig_guide.html#CondVarArch) 中的说明，使用如下方式即可：
 
 ```
 OTHER_SWIFT_FLAGS[arch=armv7] = $(inherited) -enable-library-evolution -emit-parseable-module-interface-path $(BUILT_PRODUCTS_DIR)/armv7.swiftinterface
