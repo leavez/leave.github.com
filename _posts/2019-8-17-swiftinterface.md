@@ -13,7 +13,7 @@ Module stability 代表着描述模块 API 的信息格式稳定。这个信息�
 
 但当我们激动地拿 xcode 11 beta （包含 swift 5.1 beta）编译出一个 framework 的时候，并没有生成所期待的 .swiftinterface 文件，而是同之前一样。为此经过一番探索，找到了实现的方式，也是本篇文章的主要内容。
 
-#### 添加参数
+### 添加参数
 
 在 swift 5.1 编译器中，有一个叫做 `-emit-parseable-module-interface-path` 选项。通过此选项，可以在编译的时候在指定目录生成 `.swiftinterface` 文件。如
 
@@ -33,7 +33,7 @@ Library Evolution 为了达到向后兼容，在生成代码方式上会有些�
 swiftc -enable-library-evolution -emit-parseable-module-interface-path ./a.swiftinterface demo.swift
 ```
 
-#### 生成不同架构的文件
+### 生成不同架构的文件
 
 在 xcode 中，只需要在 build settings 中的 `other swift flags` 中添加 
 
