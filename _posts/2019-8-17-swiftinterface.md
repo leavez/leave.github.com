@@ -15,6 +15,9 @@ Module stability 代表着描述模块 API 的信息格式稳定。这个信息�
 
 ### 添加参数
 
+> UPDATE:
+> 在 xcode 11 中，只需要在 build setting 中设置 `Build Libraries for Distribution` 为 YES ，即可自动生成所有东西。参考 [WWDC Session: Binary Frameworks in Swift](https://developer.apple.com/videos/play/wwdc2019/416/)
+
 在 swift 5.1 编译器中，有一个叫做 `-emit-parseable-module-interface-path` 选项。通过此选项，可以在编译的时候在指定目录生成 `.swiftinterface` 文件。如
 
 ```
