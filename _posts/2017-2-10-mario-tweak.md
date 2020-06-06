@@ -2,7 +2,7 @@
 layout:     post
 title:      Run Mario！写一个越狱插件
 category:   []
-tags:       [技术]
+tags:       [tutor]
 published:  True
 date:       2017-2-12
 ---

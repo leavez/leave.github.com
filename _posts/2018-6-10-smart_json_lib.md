@@ -2,7 +2,7 @@
 layout:     post
 title:      使用泛型构造一个聪明的 JSON 解析库
 category:   []
-tags:       [技术]
+tags:       [tutor]
 published:  True
 date:       2018-6-10
 
