@@ -41,11 +41,11 @@ date:       2016-2-5
 
 LMS 是 Long、Middle、Short 的缩写，代表对长中短三种波长敏感的感受器（视锥细胞）。从频率分布到 LMS 色彩空间中点的计算如下:
 
-$$ L=\int _{380}^{780}I(\lambda )\,{\overline {l}}(\lambda )\,d\lambda $$
+ $$ L=\int _{380}^{780}I(\lambda )\,{\overline {l}}(\lambda )\,d\lambda $$
 
-$$ M=\int _{380}^{780}I(\lambda )\,{\overline {m}}(\lambda )\,d\lambda $$
+ $$ M=\int _{380}^{780}I(\lambda )\,{\overline {m}}(\lambda )\,d\lambda $$
 
-$$ S=\int _{380}^{780}I(\lambda )\,{\overline {s}}(\lambda )\,d\lambda $$
+ $$ S=\int _{380}^{780}I(\lambda )\,{\overline {s}}(\lambda )\,d\lambda $$
 
 其中 $I$ 为光强，$\overline {s}$ 为上图中的系数。
 
@@ -109,9 +109,7 @@ CIE XYZ 是一种 CIE RGB 的线性变化，X Y Z 满足如下条件:
 
 具体实现为:
 
-```
 $$ \begin{bmatrix}X\\Y\\Z\end{bmatrix}=\frac{1}{0.17697} \begin{bmatrix} 0.49&0.31&0.20\\ 0.17697&0.81240&0.01063\\ 0.00&0.01&0.99 \end{bmatrix} \begin{bmatrix}R\\G\\B\end{bmatrix} $$
-```
 
 Color-Matching function 为
 
@@ -125,7 +123,7 @@ Color-Matching function 为
 
 由于 CIE XYZ 空间是 CIE RGB 空间的线性变换，那么 X Y Z 可以写成
 
-$$(X,Y,Z) = k (x,y,z)  \mbox{ , where }  x + y + z = 1$$
+ $$(X,Y,Z) = k (x,y,z)  \mbox{ , where }  x + y + z = 1$$
 
 那么系数 $k$ 蕴含了亮度的信息（我们还没有定义亮度 ）。
 
